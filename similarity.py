@@ -6,7 +6,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 def recommend_by_skills(skills, limit=30):
 
-    conn = sqlite3.connect("developers.db")
+    conn = sqlite3.connect("developer.db")
 
     df = pd.read_sql_query("""
         SELECT *
