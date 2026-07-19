@@ -70,7 +70,7 @@ def recommend_by_skills(skills, limit=30):
     return results
 def get_featured_developers(limit=1):
     """Pulls top developers by followers for homepage showcase."""
-    conn = sqlite3.connect("developers.db")
+    conn = sqlite3.connect("developer.db")
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
     cursor.execute("""
