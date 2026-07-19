@@ -1,5 +1,6 @@
-flask
+Flask
 scikit-learn
-pandas 
+pandas
 numpy
 gunicorn
+python-dotenv
