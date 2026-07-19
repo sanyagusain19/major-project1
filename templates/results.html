@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Matches - Network Builder</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+</head>
+<body class="text-gray-200 min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white relative bg-[#05070f] overflow-x-hidden">
+
+    <div class="ambient-glow glow-indigo"></div>
+    <div class="ambient-glow glow-purple"></div>
+    <div class="ambient-glow glow-emerald"></div>
+
+    <!-- NAVBAR -->
+    <nav class="border-b border-gray-900 bg-[#05070f]/70 backdrop-blur-xl sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-2">
+                    <div class="bg-indigo-600 p-2 rounded-lg text-white shadow-[0_0_15px_rgba(79,70,229,0.5)]">
+                        <i data-lucide="git-branch" class="w-5 h-5"></i>
+                    </div>
+                    <span class="font-bold text-xl tracking-tight text-white"> Network Builder </span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="{{ url_for('home') }}" class="text-gray-400 hover:text-indigo-400 transition-colors text-sm font-medium">Home</a>
+                    <a href="{{ url_for('developers') }}" class="text-indigo-400 hover:text-indigo-300 transition-colors text-sm font-medium drop-shadow-[0_0_8px_rgba(129,140,248,0.5)]">Developers</a>
+                    <a href="{{ url_for('youtube') }}" 
+class="bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2 rounded-lg text-sm font-medium transition-all shadow-[0_0_15px_rgba(79,70,229,0.4)] hover:shadow-[0_0_25px_rgba(79,70,229,0.6)]"> Youtube recommendations </a>
+
+                </div>
+                <a href="{{ url_for('developers') }}" class="bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2 rounded-lg text-sm font-medium transition-all shadow-[0_0_15px_rgba(79,70,229,0.4)] hover:shadow-[0_0_25px_rgba(79,70,229,0.6)]"> New Search </a>
+            </div>
+            
+        </div>
+    </nav>
+
+    <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-24 flex-grow">
+
+        <div class="flex items-center justify-between mb-8 flex-wrap gap-4">
+            <div>
+                <h1 class="text-2xl sm:text-3xl font-extrabold text-white">
+                    Your <span class="text-gradient">Recommended</span> Developers
+                </h1>
+                <p class="text-gray-400 text-sm mt-1">
+                    {{ developers|length }} match{{ 'es' if developers|length != 1 else '' }} found, ranked by relevance.
+                </p>
+            </div>
+            <a href="{{ url_for('developers') }}" class="flex items-center gap-1.5 text-xs text-indigo-400 hover:text-indigo-300 border border-indigo-500/30 hover:border-indigo-500/60 px-3 py-2 rounded-lg transition-colors">
+                <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i> Refine Search
+            </a>
+        </div>
+
+        {% if developers %}
+<div class="glow-card p-4 rounded-xl flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+    <div class="flex items-center gap-2">
+        <i data-lucide="sliders-horizontal" class="w-4 h-4 text-indigo-400"></i>
+        <span class="text-sm font-semibold text-white">Filter Recommendations</span>
+    </div>
+    <div class="flex flex-wrap gap-3">
+        <div class="flex items-center gap-1.5 bg-gray-950/60 border border-gray-800 rounded-lg px-3 py-1.5">
+            <span class="text-[11px] text-gray-500">Sort By:</span>
+            <select id="sort-select" class="bg-transparent text-xs text-gray-300 focus:outline-none cursor-pointer">
+                <option value="similarity">Highest Match</option>
+                <option value="followers">Most Followers</option>
+                <option value="repos">Most Repositories</option>
+            </select>
+        </div>
+        <input type="text" id="location-filter" placeholder="Location..."
+               class="bg-gray-950/60 border border-gray-800 rounded-lg px-3 py-1.5 text-xs text-gray-300 placeholder-gray-600 focus:outline-none focus:border-indigo-500 w-32">
+    </div>
+</div>
+
+<div id="results-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {% for developer in developers %}
+    <div class="developer-card glow-card p-5 rounded-xl flex flex-col justify-between h-full relative overflow-hidden group"
+         data-similarity="{{ developer.similarity }}"
+         data-followers="{{ developer.followers or 0 }}"
+         data-repos="{{ developer.public_repos or 0 }}"
+         data-location="{{ (developer.location or '')|lower }}">
+        <div>
+            <div class="flex items-start justify-between mb-3">
+                <div class="flex items-center gap-3">
+                    <img src="{{ developer.avatar }}" alt="{{ developer.username }}"
+                         class="w-12 h-12 rounded-full object-cover ring-2 ring-indigo-500/30">
+                    <div>
+                        <h4 class="font-bold text-white group-hover:text-indigo-400 transition-colors leading-tight">
+                            {{ developer.name or developer.username }}
+                        </h4>
+                        <p class="text-xs text-gray-500">@{{ developer.username }}</p>
+                    </div>
+                </div>
+                <span class="shrink-0 text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-2 py-0.5 rounded-full font-semibold shadow-[0_0_10px_rgba(16,185,129,0.15)]">
+                    {{ developer.similarity }}% Match
+                </span>
+            </div>
+
+            {% if developer.bio %}
+            <p class="text-xs text-gray-400 line-clamp-2 mb-3">{{ developer.bio }}</p>
+            {% endif %}
+
+            {% if developer.skills %}
+            <div class="flex flex-wrap gap-1.5 mb-3">
+                {% for skill in developer.skills.split()[:6] %}
+                <span class="text-[10px] bg-gray-900/80 text-gray-300 border border-gray-800 px-2 py-0.5 rounded">{{ skill }}</span>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <div class="flex items-center gap-3 text-[11px] text-gray-500 mb-2">
+                {% if developer.location %}
+                <span class="flex items-center gap-1"><i data-lucide="map-pin" class="w-3 h-3"></i>{{ developer.location }}</span>
+                {% endif %}
+                {% if developer.followers is not none %}
+                <span class="flex items-center gap-1"><i data-lucide="users" class="w-3 h-3"></i>{{ developer.followers }}</span>
+                {% endif %}
+            </div>
+
+            {% if developer.language %}
+            <p class="text-[11px] text-indigo-400/80">Top languages: {{ developer.language }}</p>
+            {% endif %}
+        </div>
+
+        <div class="border-t border-gray-900 pt-4 flex items-center justify-between mt-4">
+            <div class="flex items-center gap-1.5">
+                <i data-lucide="github" class="w-4 h-4 text-gray-500"></i>
+                <span class="text-xs text-gray-500">Profile Verified</span>
+            </div>
+            <a href="{{ developer.profile }}" target="_blank"
+               class="bg-indigo-900/40 border border-indigo-700/30 text-indigo-300 hover:bg-indigo-600 hover:text-white text-xs px-3 py-1.5 rounded-lg font-medium transition-all">
+                View GitHub
+            </a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<p id="no-results-msg" class="hidden text-center text-gray-400 py-12">
+    No developers match that location filter.
+</p>
+
+<div class="flex justify-center mt-8">
+    <button id="load-more-btn" class="border border-gray-800 bg-gray-950/40 hover:border-indigo-500/50 hover:bg-indigo-950/20 text-gray-300 px-6 py-2.5 rounded-lg text-sm font-medium transition-all flex items-center gap-2">
+        Show More <i data-lucide="chevron-down" class="w-4 h-4"></i>
+    </button>
+</div>
+{% else %}
+<div class="glow-card rounded-2xl py-16 px-6 text-center max-w-lg mx-auto">
+    <i data-lucide="search-x" class="w-10 h-10 text-gray-600 mx-auto mb-4"></i>
+    <h3 class="text-white font-semibold mb-2">No matches found</h3>
+    <p class="text-gray-400 text-sm mb-6">Try selecting different or fewer skills.</p>
+    <a href="{{ url_for('developers') }}" class="inline-block bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2.5 rounded-lg text-sm font-medium transition-all">
+        Try Again
+    </a>
+</div>
+{% endif %}
+    </main>
+
+    <footer class="border-t border-gray-900 bg-[#05070f] py-8 text-center text-xs text-gray-600 relative z-10">
+        <p>&copy; 2026 Network Builder AI. All rights reserved.</p>
+    </footer>
+
+    <script>
+    lucide.createIcons();
+
+    const INITIAL_VISIBLE = 6;
+    const LOAD_MORE_STEP = 6;
+
+    const sortSelect = document.getElementById('sort-select');
+    const locationFilter = document.getElementById('location-filter');
+    const resultsGrid = document.getElementById('results-grid');
+    const noResultsMsg = document.getElementById('no-results-msg');
+    const loadMoreBtn = document.getElementById('load-more-btn');
+
+    let visibleLimit = INITIAL_VISIBLE;
+
+    function render() {
+        if (!resultsGrid) return;
+
+        const cards = Array.from(resultsGrid.querySelectorAll('.developer-card'));
+        const query = locationFilter.value.trim().toLowerCase();
+
+        // 1. Determine which cards match the location filter
+        const matching = cards.filter(card =>
+            !query || card.dataset.location.includes(query)
+        );
+        const nonMatching = cards.filter(card => !matching.includes(card));
+
+        nonMatching.forEach(card => card.classList.add('hidden'));
+
+        // 2. Within matching cards, show only up to visibleLimit
+        matching.forEach((card, i) => {
+            card.classList.toggle('hidden', i >= visibleLimit);
+        });
+
+        // 3. Empty state message
+        noResultsMsg.classList.toggle('hidden', matching.length !== 0);
+
+        // 4. Show/hide the Load More button
+        loadMoreBtn.classList.toggle('hidden', matching.length <= visibleLimit);
+    }
+
+    function applySort() {
+        if (!resultsGrid) return;
+
+        const key = sortSelect.value; // 'similarity' | 'followers' | 'repos'
+        const cards = Array.from(resultsGrid.querySelectorAll('.developer-card'));
+
+        cards.sort((a, b) => (parseFloat(b.dataset[key]) || 0) - (parseFloat(a.dataset[key]) || 0));
+        cards.forEach(card => resultsGrid.appendChild(card));
+
+        visibleLimit = INITIAL_VISIBLE; // reset paging on re-sort
+        render();
+    }
+
+    sortSelect.addEventListener('change', applySort);
+
+    locationFilter.addEventListener('input', () => {
+        visibleLimit = INITIAL_VISIBLE; // reset paging on new filter
+        render();
+    });
+
+    loadMoreBtn.addEventListener('click', () => {
+        visibleLimit += LOAD_MORE_STEP;
+        render();
+    });
+
+    render(); // initial paint: show first 6
+</script>
+</body>
+</html>

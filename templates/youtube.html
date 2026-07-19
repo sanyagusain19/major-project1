@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Learning Hub - Network Builder</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+</head>
+
+
+<body class="text-gray-200 min-h-screen flex flex-col bg-[#05070f] overflow-x-hidden">
+
+
+<div class="ambient-glow glow-indigo"></div>
+<div class="ambient-glow glow-purple"></div>
+<div class="ambient-glow glow-emerald"></div>
+
+
+
+<!-- NAVBAR -->
+
+<nav class="border-b border-gray-900 bg-[#05070f]/70 backdrop-blur-xl sticky top-0 z-50">
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div class="flex items-center justify-between h-16">
+
+
+            <div class="flex items-center gap-2">
+
+                <div class="bg-indigo-600 p-2 rounded-lg text-white shadow-[0_0_15px_rgba(79,70,229,0.5)]">
+
+                    <i data-lucide="book-open" class="w-5 h-5"></i>
+
+                </div>
+
+                <span class="font-bold text-xl tracking-tight text-white">
+                    Network Builder
+                </span>
+
+            </div>
+
+
+
+            <div class="hidden md:flex items-center space-x-8">
+
+                <a href="{{ url_for('home') }}"
+                class="text-gray-400 hover:text-indigo-400 transition-colors text-sm font-medium">
+                    Home
+                </a>
+
+
+                <a href="{{ url_for('developers') }}"
+                class="text-gray-400 hover:text-indigo-400 transition-colors text-sm font-medium">
+                    Developers
+                </a>
+
+
+                <a href="{{ url_for('youtube') }}"
+                class="text-indigo-400 transition-colors text-sm font-medium">
+                    Learning
+                </a>
+
+
+            </div>
+
+
+
+            <a href="{{ url_for('developers') }}"
+            class="bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2 rounded-lg text-sm font-medium transition-all">
+                [ New Search ]
+            </a>
+
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+
+
+<main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-20 flex-grow">
+
+
+    <div class="mb-10">
+
+        <h1 class="text-3xl font-extrabold text-white">
+
+            Your 
+            <span class="text-gradient">
+                Learning Path
+            </span>
+            🎥
+
+        </h1>
+
+
+        <p class="text-gray-400 mt-2 text-sm">
+
+            Tutorials recommended according to your skills and interests.
+
+        </p>
+
+
+    </div>
+
+
+
+
+{% if videos %}
+
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+
+{% for video in videos %}
+
+
+<div class="glow-card rounded-xl overflow-hidden group">
+
+
+    <img 
+    src="{{ video.thumbnail }}"
+    alt="Video thumbnail"
+    class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
+
+
+    <div class="p-5">
+
+
+        <h3 class="text-white font-semibold line-clamp-2">
+
+            {{ video.title }}
+
+        </h3>
+
+
+        <p class="text-sm text-gray-400 mt-2">
+
+            {{ video.channel_name }}
+
+        </p>
+
+
+
+        <a href="{{ video.youtube_url }}"
+        target="_blank"
+        class="inline-flex items-center gap-2 mt-5 bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-lg text-sm transition-all">
+
+
+            <i data-lucide="play" class="w-4 h-4"></i>
+
+            Watch Tutorial
+
+
+        </a>
+
+
+
+    </div>
+
+
+</div>
+
+
+{% endfor %}
+
+
+</div>
+
+
+
+{% else %}
+
+
+
+<div class="glow-card rounded-2xl py-16 px-6 text-center max-w-lg mx-auto">
+
+
+    <i data-lucide="youtube" class="w-10 h-10 text-gray-600 mx-auto mb-4"></i>
+
+
+    <h3 class="text-white font-semibold mb-2">
+
+        No Learning Recommendations Yet
+
+    </h3>
+
+
+    <p class="text-gray-400 text-sm mb-6">
+
+        Search developers first so we can personalize tutorials for you.
+
+    </p>
+
+
+    <a href="{{ url_for('developers') }}"
+    class="inline-block bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2.5 rounded-lg text-sm">
+
+        Find Developers
+
+    </a>
+
+
+</div>
+
+
+{% endif %}
+
+
+
+</main>
+
+
+
+<footer class="border-t border-gray-900 bg-[#05070f] py-8 text-center text-xs text-gray-600">
+
+<p>
+&copy; 2026 Network Builder AI. All rights reserved.
+</p>
+
+</footer>
+
+
+
+
+<script>
+
+lucide.createIcons();
+
+</script>
+
+
+</body>
+
+</html>

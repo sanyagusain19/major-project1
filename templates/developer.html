@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Developers - Network Builder</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+</head>
+<body class="text-gray-200 min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white relative bg-[#05070f] overflow-x-hidden">
+
+    <div class="ambient-glow glow-indigo"></div>
+    <div class="ambient-glow glow-purple"></div>
+    <div class="ambient-glow glow-emerald"></div>
+
+    <!-- NAVBAR -->
+    <nav class="border-b border-gray-900 bg-[#05070f]/70 backdrop-blur-xl sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-2">
+                    <div class="bg-indigo-600 p-2 rounded-lg text-white shadow-[0_0_15px_rgba(79,70,229,0.5)]">
+                        <i data-lucide="git-branch" class="w-5 h-5"></i>
+                    </div>
+                    <span class="font-bold text-xl tracking-tight text-white"> Network Builder </span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="{{ url_for('home') }}" class="text-gray-400 hover:text-indigo-400 transition-colors text-sm font-medium">Home</a>
+                    <a href="{{ url_for('developers') }}" class="text-indigo-400 hover:text-indigo-300 transition-colors text-sm font-medium drop-shadow-[0_0_8px_rgba(129,140,248,0.5)]">Developers</a>
+                    <!-- <a href="#" class="text-gray-400 hover:text-indigo-400 transition-colors text-sm font-medium">Repositories</a>
+                    <a href="#" class="text-gray-400 hover:text-indigo-400 transition-colors text-sm font-medium">Resources</a> -->
+                </div>
+                <!-- <a href="#" class="bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2 rounded-lg text-sm font-medium transition-all shadow-[0_0_15px_rgba(79,70,229,0.4)] hover:shadow-[0_0_25px_rgba(79,70,229,0.6)]">[ Get Started ]</a>
+            </div> -->
+        </div>
+    </nav>
+
+    <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-24 flex-grow">
+
+        <div id="hero-section" class="text-center max-w-2xl mx-auto mb-10">
+            <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white leading-tight mb-3">
+                Find Developers <span class="text-gradient">Perfect For You</span>
+            </h1>
+            <p class="text-gray-400 text-sm sm:text-base leading-relaxed">
+                AI recommends developers based on your skills, preferred languages, and interests.
+            </p>
+        </div>
+
+        <section id="form-container" class="max-w-3xl mx-auto">
+            <form id="recommendation-form"
+                  action="{{ url_for('recommend') }}"
+                  method="POST"
+                  class="glow-card p-6 sm:p-8 rounded-2xl space-y-6">
+
+                <div>
+                    <label class="block text-sm font-semibold text-gray-300 mb-3 flex items-center gap-2">
+                        <i data-lucide="cpu" class="w-4 h-4 text-indigo-400"></i> Your Skills
+                    </label>
+                    <div class="flex flex-wrap gap-2" id="skills-container">
+                        <input type="hidden" name="skills" id="selected-skills-input" value="">
+                        <button type="button" class="skill-chip border border-gray-800 bg-gray-950/40 hover:border-indigo-500/50 hover:bg-indigo-950/20 text-gray-400 px-3 py-1.5 rounded-full text-xs font-medium transition-all cursor-pointer" data-skill="Python">Python</button>
+                        <button type="button" class="skill-chip border border-gray-800 bg-gray-950/40 hover:border-indigo-500/50 hover:bg-indigo-950/20 text-gray-400 px-3 py-1.5 rounded-full text-xs font-medium transition-all cursor-pointer" data-skill="Java">Java</button>
+                        <button type="button" class="skill-chip border border-gray-800 bg-gray-950/40 hover:border-indigo-500/50 hover:bg-indigo-950/20 text-gray-400 px-3 py-1.5 rounded-full text-xs font-medium transition-all cursor-pointer" data-skill="JavaScript">JavaScript</button>
+                        <button type="button" class="skill-chip border border-gray-800 bg-gray-950/40 hover:border-indigo-500/50 hover:bg-indigo-950/20 text-gray-400 px-3 py-1.5 rounded-full text-xs font-medium transition-all cursor-pointer" data-skill="C++">C++</button>
+                        <button type="button" class="skill-chip border border-gray-800 bg-gray-950/40 hover:border-indigo-500/50 hover:bg-indigo-950/20 text-gray-400 px-3 py-1.5 rounded-full text-xs font-medium transition-all cursor-pointer" data-skill="Machine Learning">Machine Learning</button>
+                        <button type="button" class="skill-chip border border-gray-800 bg-gray-950/40 hover:border-indigo-500/50 hover:bg-indigo-950/20 text-gray-400 px-3 py-1.5 rounded-full text-xs font-medium transition-all cursor-pointer" data-skill="React">React</button>
+                        <button type="button" class="skill-chip border border-gray-800 bg-gray-950/40 hover:border-indigo-500/50 hover:bg-indigo-950/20 text-gray-400 px-3 py-1.5 rounded-full text-xs font-medium transition-all cursor-pointer" data-skill="Flask">Flask</button>
+                        <button type="button" class="skill-chip border border-gray-800 bg-gray-950/40 hover:border-indigo-500/50 hover:bg-indigo-950/20 text-gray-400 px-3 py-1.5 rounded-full text-xs font-medium transition-all cursor-pointer" data-skill="FastAPI">FastAPI</button>
+                        <button type="button" class="skill-chip border border-gray-800 bg-gray-950/40 hover:border-indigo-500/50 hover:bg-indigo-950/20 text-gray-400 px-3 py-1.5 rounded-full text-xs font-medium transition-all cursor-pointer" data-skill="Node.js">Node.js</button>
+                    </div>
+                    <p class="text-xs text-gray-600 mt-2" id="skills-hint">Select at least one skill</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="interests" class="block text-sm font-semibold text-gray-300 mb-2 flex items-center gap-2">
+                            <i data-lucide="sparkles" class="w-4 h-4 text-purple-400"></i> Interests
+                        </label>
+                        <select id="interests" name="interests" class="w-full bg-gray-950/60 border border-gray-800 rounded-lg px-4 py-2.5 text-sm text-gray-300 focus:outline-none focus:border-indigo-500 transition-colors">
+                            <option value="">Select Domain...</option>
+                            <option value="AI">AI</option>
+                            <option value="Data Science">Data Science</option>
+                            <option value="Backend">Backend</option>
+                            <option value="Frontend">Frontend</option>
+                            <option value="Cyber Security">Cyber Security</option>
+                            <option value="Cloud">Cloud</option>
+                            <option value="Android">Android</option>
+                            <option value="Open Source">Open Source</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="preferred-language" class="block text-sm font-semibold text-gray-300 mb-2 flex items-center gap-2">
+                            <i data-lucide="code-2" class="w-4 h-4 text-pink-400"></i> Preferred Language
+                        </label>
+                        <select id="preferred-language" name="preferred_language" class="w-full bg-gray-950/60 border border-gray-800 rounded-lg px-4 py-2.5 text-sm text-gray-300 focus:outline-none focus:border-indigo-500 transition-colors">
+                            <option value="">Select Language...</option>
+                            <option value="Python">Python</option>
+                            <option value="Java">Java</option>
+                            <option value="C++">C++</option>
+                            <option value="JavaScript">JavaScript</option>
+                            <option value="Go">Go</option>
+                            <option value="Rust">Rust</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-gray-300 mb-3 flex items-center gap-2">
+                        <i data-lucide="gauge" class="w-4 h-4 text-teal-400"></i> Experience Level
+                    </label>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <label class="flex items-center gap-2 text-sm text-gray-400 cursor-pointer hover:text-white transition-colors">
+                            <input type="radio" name="experience" value="Beginner" class="accent-indigo-600 focus:ring-0">
+                            <span>Beginner</span>
+                        </label>
+                        <label class="flex items-center gap-2 text-sm text-gray-400 cursor-pointer hover:text-white transition-colors">
+                            <input type="radio" name="experience" value="Intermediate" class="accent-indigo-600 focus:ring-0" checked>
+                            <span>Intermediate</span>
+                        </label>
+                        <label class="flex items-center gap-2 text-sm text-gray-400 cursor-pointer hover:text-white transition-colors">
+                            <input type="radio" name="experience" value="Advanced" class="accent-indigo-600 focus:ring-0">
+                            <span>Advanced</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="pt-2">
+                    <button type="submit" id="submit-btn" class="w-full bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:to-pink-500 text-white font-bold py-3.5 px-6 rounded-xl text-sm transition-all shadow-[0_0_20px_rgba(168,85,247,0.3)] hover:shadow-[0_0_30px_rgba(168,85,247,0.6)] tracking-wide uppercase flex items-center justify-center gap-2">
+                        <i data-lucide="wand-2" class="w-4 h-4"></i> Generate AI Recommendations
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Loading screen shown briefly on submit -->
+        <section id="loading-screen" class="hidden flex-col items-center justify-center py-20 max-w-md mx-auto space-y-6">
+            <div class="relative w-20 h-20">
+                <div class="absolute inset-0 rounded-full border-4 border-indigo-500/20 border-t-indigo-500 animate-spin"></div>
+                <div class="absolute inset-2 rounded-full border-4 border-purple-500/10 border-b-purple-400 animate-spin" style="animation-direction: reverse; animation-duration: 1.5s;"></div>
+            </div>
+            <div class="text-center space-y-2">
+                <h3 class="text-lg font-bold text-white tracking-wide" id="loader-status">Finding developers...</h3>
+                <p class="text-xs text-indigo-400/80 animate-pulse" id="loader-substatus">Scanning GitHub profiles...</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="border-t border-gray-900 bg-[#05070f] py-8 text-center text-xs text-gray-600 relative z-10">
+        <p>&copy; 2026 Network Builder AI. All rights reserved.</p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        const selectedSkillsInput = document.getElementById('selected-skills-input');
+        const skillChips = document.querySelectorAll('.skill-chip');
+        const skillsHint = document.getElementById('skills-hint');
+        let selectedSkills = [];
+
+        skillChips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                const skill = chip.getAttribute('data-skill');
+                if (selectedSkills.includes(skill)) {
+                    selectedSkills = selectedSkills.filter(s => s !== skill);
+                    chip.classList.remove('border-indigo-500', 'bg-indigo-950/40', 'text-indigo-300');
+                    chip.classList.add('border-gray-800', 'bg-gray-950/40', 'text-gray-400');
+                } else {
+                    selectedSkills.push(skill);
+                    chip.classList.remove('border-gray-800', 'bg-gray-950/40', 'text-gray-400');
+                    chip.classList.add('border-indigo-500', 'bg-indigo-950/40', 'text-indigo-300');
+                }
+                selectedSkillsInput.value = selectedSkills.join(',');
+                skillsHint.textContent = selectedSkills.length
+                    ? selectedSkills.length + ' skill(s) selected'
+                    : 'Select at least one skill';
+            });
+        });
+
+        const formEl = document.getElementById('recommendation-form');
+        const formContainer = document.getElementById('form-container');
+        const heroSection = document.getElementById('hero-section');
+        const loadingScreen = document.getElementById('loading-screen');
+        const loaderStatus = document.getElementById('loader-status');
+        const loaderSubstatus = document.getElementById('loader-substatus');
+
+        const steps = [
+            { main: "Finding developers...", sub: "Scanning GitHub database profiles..." },
+            { main: "Analyzing repositories...", sub: "Comparing skill overlap..." },
+            { main: "Ranking matches...", sub: "Calculating match scores..." }
+        ];
+
+        formEl.addEventListener('submit', (e) => {
+            if (selectedSkills.length === 0) {
+                e.preventDefault();
+                skillsHint.classList.add('text-pink-400');
+                skillsHint.textContent = 'Please select at least one skill to continue';
+                return;
+            }
+
+            e.preventDefault();
+            formContainer.classList.add('hidden');
+            heroSection.classList.add('hidden');
+            loadingScreen.classList.remove('hidden');
+            loadingScreen.classList.add('flex');
+
+            let currentStep = 0;
+            const interval = setInterval(() => {
+                if (currentStep < steps.length) {
+                    loaderStatus.textContent = steps[currentStep].main;
+                    loaderSubstatus.textContent = steps[currentStep].sub;
+                    currentStep++;
+                } else {
+                    clearInterval(interval);
+                    formEl.submit();
+                }
+            }, 700);
+        });
+    </script>
+</body>
+</html>

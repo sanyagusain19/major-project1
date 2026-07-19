@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How It Works - Network Builder</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+</head>
+<body class="text-gray-200 min-h-screen flex flex-col justify-between">
+
+    <!-- NAVBAR (same as index) -->
+    <nav class="border-b border-gray-900 bg-[#05070f]/70 backdrop-blur-xl sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-2">
+                    <div class="bg-indigo-600 p-2 rounded-lg text-white shadow-[0_0_15px_rgba(79,70,229,0.5)]">
+                        <i data-lucide="git-branch" class="w-5 h-5"></i>
+                    </div>
+                    <span class="font-bold text-xl tracking-tight text-white">Network Builder</span>
+                </div>
+                <div>   
+                <a href="/" class="text-gray-400 hover:text-indigo-400 transition-colors text-sm font-medium">Home</a>
+                <a href="{{ url_for('developers') }}" class="text-gray-400 hover:text-indigo-400 transition-colors text-sm font-medium">Developers</a>
+                <a href="{{ url_for('how_it_works') }}" class="text-indigo-400 hover:text-indigo-300 transition-colors text-sm font-medium">How It Works</a>
+                </div>
+                <div>
+                    <a href="{{ url_for('developers') }}" class="bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2 rounded-lg text-sm font-medium transition-all shadow-[0_0_15px_rgba(79,70,229,0.4)] hover:shadow-[0_0_25px_rgba(79,70,229,0.6)]">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HOW IT WORKS — full page, signature pastel theme -->
+    <main class="flex-1 py-16">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <div class="relative rounded-[2rem] overflow-hidden p-8 sm:p-12 lg:p-20"
+                 style="background: linear-gradient(135deg, #FDF2F8 0%, #F6ECFB 55%, #F3E8FF 100%);">
+
+                <div class="absolute -top-20 -right-20 w-72 h-72 rounded-full opacity-40 blur-3xl" style="background:#F5B8D6;"></div>
+                <div class="absolute -bottom-24 -left-16 w-64 h-64 rounded-full opacity-40 blur-3xl" style="background:#C9AEF2;"></div>
+
+                <div class="relative">
+                    <div class="max-w-xl mx-auto text-center space-y-4 mb-20">
+                        <span class="inline-flex items-center gap-2 bg-[#FDE6F3] text-[#C7508F] text-xs sm:text-sm font-semibold px-4 py-1.5 rounded-full" style="font-family:'Poppins',sans-serif;">
+                            ✨ How Network Builder Works
+                        </span>
+                        <h1 class="text-3xl sm:text-4xl font-bold" style="font-family:'Baloo 2',sans-serif; color:#2D1B3D;">
+                            From your skills to your next connection
+                        </h1>
+                        <p class="text-sm sm:text-base leading-relaxed" style="font-family:'Poppins',sans-serif; color:#6B5C7A;">
+                            Four simple steps, matched across GitHub and YouTube.
+                        </p>
+                    </div>
+
+                    <div class="relative grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-6">
+                        <div class="hidden md:block absolute top-7 left-[12.5%] right-[12.5%] h-px" style="background:#E7D3EE;"></div>
+
+                        <div class="relative flex flex-col items-center text-center space-y-3">
+                            <div class="relative z-10 w-14 h-14 rounded-full bg-white flex items-center justify-center shadow-sm border" style="border-color:#F3D9E8;">
+                                <i data-lucide="keyboard" class="w-5 h-5" style="color:#C7508F;"></i>
+                            </div>
+                            <span class="text-[11px] font-semibold tracking-widest" style="color:#C9A9D9; font-family:'Poppins',sans-serif;">STEP 01</span>
+                            <div>
+                                <p class="text-sm font-semibold mb-1" style="color:#2D1B3D; font-family:'Baloo 2',sans-serif;">Enter your skills</p>
+                                <p class="text-xs leading-relaxed" style="color:#8A7A98; font-family:'Poppins',sans-serif;">Tell us your stack, interests, and what you want to learn next.</p>
+                            </div>
+                        </div>
+
+                        <div class="relative flex flex-col items-center text-center space-y-3">
+                            <div class="relative z-10 w-14 h-14 rounded-full flex items-center justify-center shadow-sm" style="background:#F6D5E7;">
+                                <i data-lucide="sparkles" class="w-5 h-5" style="color:#C7508F;"></i>
+                            </div>
+                            <span class="text-[11px] font-semibold tracking-widest" style="color:#C9A9D9; font-family:'Poppins',sans-serif;">STEP 02</span>
+                            <div>
+                                <p class="text-sm font-semibold mb-1" style="color:#2D1B3D; font-family:'Baloo 2',sans-serif;">AI analyzes your profile</p>
+                                <p class="text-xs leading-relaxed" style="color:#8A7A98; font-family:'Poppins',sans-serif;">Builds a skill and interest signature from what you enter.</p>
+                            </div>
+                        </div>
+
+                        <div class="relative flex flex-col items-center text-center space-y-3">
+                            <div class="relative z-10 w-14 h-14 rounded-full bg-white flex items-center justify-center shadow-sm border" style="border-color:#E4D3F0;">
+                                <i data-lucide="search" class="w-5 h-5" style="color:#9B6FE0;"></i>
+                            </div>
+                            <span class="text-[11px] font-semibold tracking-widest" style="color:#C9A9D9; font-family:'Poppins',sans-serif;">STEP 03</span>
+                            <div>
+                                <p class="text-sm font-semibold mb-1" style="color:#2D1B3D; font-family:'Baloo 2',sans-serif;">Matched across sources</p>
+                                <p class="text-xs leading-relaxed mb-2" style="color:#8A7A98; font-family:'Poppins',sans-serif;">Cross-referenced against GitHub and YouTube.</p>
+                                <div class="flex items-center justify-center gap-2">
+                                    <span class="flex items-center gap-1 text-[10px] font-medium rounded-full px-2.5 py-1 bg-white border" style="color:#9B6FE0; border-color:#E4D3F0; font-family:'Poppins',sans-serif;">
+                                        <i data-lucide="github" class="w-3 h-3"></i> GitHub
+                                    </span>
+                                    <span class="flex items-center gap-1 text-[10px] font-medium rounded-full px-2.5 py-1 bg-white border" style="color:#C7508F; border-color:#F3D9E8; font-family:'Poppins',sans-serif;">
+                                        <i data-lucide="youtube" class="w-3 h-3"></i> YouTube
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="relative flex flex-col items-center text-center space-y-3">
+                            <div class="relative z-10 w-14 h-14 rounded-full flex items-center justify-center shadow-md" style="background: linear-gradient(135deg, #E06A9E, #C7508F);">
+                                <i data-lucide="list-ordered" class="w-5 h-5 text-white"></i>
+                            </div>
+                            <span class="text-[11px] font-semibold tracking-widest" style="color:#C9A9D9; font-family:'Poppins',sans-serif;">STEP 04</span>
+                            <div>
+                                <p class="text-sm font-semibold mb-1" style="color:#2D1B3D; font-family:'Baloo 2',sans-serif;">Ranked recommendations</p>
+                                <p class="text-xs leading-relaxed" style="color:#8A7A98; font-family:'Poppins',sans-serif;">A personalized, ranked list of the best matches for you.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-20">
+                        <a href="{{ url_for('developers') }}"
+                           class="inline-block text-white px-8 py-3 rounded-full font-semibold text-sm shadow-md hover:shadow-lg transition-all"
+                           style="background: linear-gradient(135deg, #E06A9E, #C7508F); font-family:'Poppins',sans-serif;">
+                            Find My Matches
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>lucide.createIcons();</script>
+</body>
+</html>
