@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-from flask import Flask, render_template, request, session
+from flask import Flask, render_template, request, session, redirect, url_for
 
 from similarity import recommend_by_skills, get_featured_developers
 from youtube import search_youtube
@@ -31,46 +31,30 @@ def developers():
 
 @app.route("/recommend", methods=["POST"])
 def recommend():
-
+    # this ONLY processes the form and saves data to session
     skills = request.form.get("skills", "")
     interests = request.form.get("interests", "")
 
+    skills_list = [s.strip() for s in skills.split(",") if s.strip()]
+    interests_list = [i.strip() for i in interests.split(",") if i.strip()]
 
-    skills_list = [
-        s.strip()
-        for s in skills.split(",")
-        if s.strip()
-    ]
-
-
-    interests_list = [
-        i.strip()
-        for i in interests.split(",")
-        if i.strip()
-    ]
-
-
-    # save for YouTube recommendations
     session["skills"] = skills_list
     session["interests"] = interests_list
 
+    # instead of rendering here, we REDIRECT
+    return redirect(url_for("results"))
+
+
+@app.route("/recommend", methods=["GET"])
+def results():
+    # this ONLY displays the results page
+    skills_list = session.get("skills", [])
 
     if not skills_list:
-        return render_template(
-            "results.html",
-            developers=[]
-        )
-
+        return render_template("results.html", developers=[])
 
     developer_list = recommend_by_skills(skills_list)
-
-
-    return render_template(
-        "results.html",
-        developers=developer_list
-    )
-
-
+    return render_template("results.html", developers=developer_list)
 
 @app.route("/youtube")
 def youtube():

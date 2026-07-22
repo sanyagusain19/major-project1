@@ -52,24 +52,67 @@
                   method="POST"
                   class="glow-card p-6 sm:p-8 rounded-2xl space-y-6">
 
-                <div>
-                    <label class="block text-sm font-semibold text-gray-300 mb-3 flex items-center gap-2">
-                        <i data-lucide="cpu" class="w-4 h-4 text-indigo-400"></i> Your Skills
-                    </label>
-                    <div class="flex flex-wrap gap-2" id="skills-container">
-                        <input type="hidden" name="skills" id="selected-skills-input" value="">
-                        <button type="button" class="skill-chip border border-gray-800 bg-gray-950/40 hover:border-indigo-500/50 hover:bg-indigo-950/20 text-gray-400 px-3 py-1.5 rounded-full text-xs font-medium transition-all cursor-pointer" data-skill="Python">Python</button>
-                        <button type="button" class="skill-chip border border-gray-800 bg-gray-950/40 hover:border-indigo-500/50 hover:bg-indigo-950/20 text-gray-400 px-3 py-1.5 rounded-full text-xs font-medium transition-all cursor-pointer" data-skill="Java">Java</button>
-                        <button type="button" class="skill-chip border border-gray-800 bg-gray-950/40 hover:border-indigo-500/50 hover:bg-indigo-950/20 text-gray-400 px-3 py-1.5 rounded-full text-xs font-medium transition-all cursor-pointer" data-skill="JavaScript">JavaScript</button>
-                        <button type="button" class="skill-chip border border-gray-800 bg-gray-950/40 hover:border-indigo-500/50 hover:bg-indigo-950/20 text-gray-400 px-3 py-1.5 rounded-full text-xs font-medium transition-all cursor-pointer" data-skill="C++">C++</button>
-                        <button type="button" class="skill-chip border border-gray-800 bg-gray-950/40 hover:border-indigo-500/50 hover:bg-indigo-950/20 text-gray-400 px-3 py-1.5 rounded-full text-xs font-medium transition-all cursor-pointer" data-skill="Machine Learning">Machine Learning</button>
-                        <button type="button" class="skill-chip border border-gray-800 bg-gray-950/40 hover:border-indigo-500/50 hover:bg-indigo-950/20 text-gray-400 px-3 py-1.5 rounded-full text-xs font-medium transition-all cursor-pointer" data-skill="React">React</button>
-                        <button type="button" class="skill-chip border border-gray-800 bg-gray-950/40 hover:border-indigo-500/50 hover:bg-indigo-950/20 text-gray-400 px-3 py-1.5 rounded-full text-xs font-medium transition-all cursor-pointer" data-skill="Flask">Flask</button>
-                        <button type="button" class="skill-chip border border-gray-800 bg-gray-950/40 hover:border-indigo-500/50 hover:bg-indigo-950/20 text-gray-400 px-3 py-1.5 rounded-full text-xs font-medium transition-all cursor-pointer" data-skill="FastAPI">FastAPI</button>
-                        <button type="button" class="skill-chip border border-gray-800 bg-gray-950/40 hover:border-indigo-500/50 hover:bg-indigo-950/20 text-gray-400 px-3 py-1.5 rounded-full text-xs font-medium transition-all cursor-pointer" data-skill="Node.js">Node.js</button>
-                    </div>
-                    <p class="text-xs text-gray-600 mt-2" id="skills-hint">Select at least one skill</p>
-                </div>
+     <div>
+    <label class="block text-sm font-semibold text-gray-300 mb-3 flex items-center gap-2">
+        <i data-lucide="cpu" class="w-4 h-4 text-indigo-400"></i> Your Skills
+    </label>
+
+    <div class="relative" id="skills-dropdown-wrapper">
+        <button type="button" id="skills-dropdown-btn"
+            class="w-full flex items-center justify-between bg-gray-950/60 border border-gray-800 rounded-lg px-4 py-2.5 text-sm text-gray-300 focus:outline-none focus:border-indigo-500 transition-colors">
+            <span id="skills-dropdown-label">Select skills...</span>
+            <i data-lucide="chevron-down" class="w-4 h-4 text-gray-500"></i>
+        </button>
+
+        <div id="skills-dropdown-menu"
+            class="hidden absolute z-20 mt-2 w-full bg-gray-950 border border-gray-800 rounded-lg shadow-lg max-h-56 overflow-y-auto">
+            <label class="flex items-center gap-2 px-4 py-2 text-sm text-gray-300 hover:bg-indigo-950/30 cursor-pointer">
+                <input type="checkbox" value="Python" class="skill-checkbox accent-indigo-600"> Python
+            </label>
+            <label class="flex items-center gap-2 px-4 py-2 text-sm text-gray-300 hover:bg-indigo-950/30 cursor-pointer">
+                <input type="checkbox" value="Java" class="skill-checkbox accent-indigo-600"> Java
+            </label>
+            <label class="flex items-center gap-2 px-4 py-2 text-sm text-gray-300 hover:bg-indigo-950/30 cursor-pointer">
+                <input type="checkbox" value="JavaScript" class="skill-checkbox accent-indigo-600"> JavaScript
+            </label>
+            <label class="flex items-center gap-2 px-4 py-2 text-sm text-gray-300 hover:bg-indigo-950/30 cursor-pointer">
+                <input type="checkbox" value="C++" class="skill-checkbox accent-indigo-600"> C++
+            </label>
+            <label class="flex items-center gap-2 px-4 py-2 text-sm text-gray-300 hover:bg-indigo-950/30 cursor-pointer">
+                <input type="checkbox" value="Machine Learning" class="skill-checkbox accent-indigo-600"> Machine Learning
+            </label>
+            <label class="flex items-center gap-2 px-4 py-2 text-sm text-gray-300 hover:bg-indigo-950/30 cursor-pointer">
+                <input type="checkbox" value="React" class="skill-checkbox accent-indigo-600"> React
+            </label>
+            <label class="flex items-center gap-2 px-4 py-2 text-sm text-gray-300 hover:bg-indigo-950/30 cursor-pointer">
+                <input type="checkbox" value="Flask" class="skill-checkbox accent-indigo-600"> Flask
+            </label>
+            <label class="flex items-center gap-2 px-4 py-2 text-sm text-gray-300 hover:bg-indigo-950/30 cursor-pointer">
+                <input type="checkbox" value="FastAPI" class="skill-checkbox accent-indigo-600"> FastAPI
+            </label>
+            <label class="flex items-center gap-2 px-4 py-2 text-sm text-gray-300 hover:bg-indigo-950/30 cursor-pointer">
+                <input type="checkbox" value="Node.js" class="skill-checkbox accent-indigo-600"> Node.js
+            </label>
+        </div>
+    </div>
+
+    <div class="mt-3">
+        <label for="custom-skill-input" class="block text-xs font-medium text-gray-400 mb-1">
+            Don't see your skill? Add it manually:
+        </label>
+        <div class="flex gap-2">
+            <input type="text" id="custom-skill-input" placeholder="e.g. Django, Kotlin, Docker"
+                   class="flex-1 bg-gray-950/60 border border-gray-800 rounded-lg px-4 py-2 text-sm text-gray-300 focus:outline-none focus:border-indigo-500 transition-colors">
+            <button type="button" id="add-custom-skill" class="bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+                Add
+            </button>
+        </div>
+    </div>
+
+    <div class="flex flex-wrap gap-2 mt-3" id="selected-skills-display"></div>
+    <input type="hidden" name="skills" id="selected-skills-input" value="">
+    <p class="text-xs text-gray-600 mt-2" id="skills-hint">Select at least one skill</p>
+</div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
@@ -152,30 +195,115 @@
 
     <script>
         lucide.createIcons();
+const skillsDropdownBtn = document.getElementById('skills-dropdown-btn');
+const skillsDropdownMenu = document.getElementById('skills-dropdown-menu');
+const skillsDropdownLabel = document.getElementById('skills-dropdown-label');
+const skillCheckboxes = document.querySelectorAll('.skill-checkbox');
+const customSkillInput = document.getElementById('custom-skill-input');
+const addCustomSkillBtn = document.getElementById('add-custom-skill');
+const selectedSkillsInput = document.getElementById('selected-skills-input');
+const selectedSkillsDisplay = document.getElementById('selected-skills-display');
+const skillsHint = document.getElementById('skills-hint');
 
-        const selectedSkillsInput = document.getElementById('selected-skills-input');
-        const skillChips = document.querySelectorAll('.skill-chip');
-        const skillsHint = document.getElementById('skills-hint');
-        let selectedSkills = [];
+let selectedSkills = [];
 
-        skillChips.forEach(chip => {
-            chip.addEventListener('click', () => {
-                const skill = chip.getAttribute('data-skill');
-                if (selectedSkills.includes(skill)) {
-                    selectedSkills = selectedSkills.filter(s => s !== skill);
-                    chip.classList.remove('border-indigo-500', 'bg-indigo-950/40', 'text-indigo-300');
-                    chip.classList.add('border-gray-800', 'bg-gray-950/40', 'text-gray-400');
-                } else {
-                    selectedSkills.push(skill);
-                    chip.classList.remove('border-gray-800', 'bg-gray-950/40', 'text-gray-400');
-                    chip.classList.add('border-indigo-500', 'bg-indigo-950/40', 'text-indigo-300');
-                }
-                selectedSkillsInput.value = selectedSkills.join(',');
-                skillsHint.textContent = selectedSkills.length
-                    ? selectedSkills.length + ' skill(s) selected'
-                    : 'Select at least one skill';
-            });
+skillsDropdownBtn.addEventListener('click', () => {
+    skillsDropdownMenu.classList.toggle('hidden');
+});
+
+document.addEventListener('click', (e) => {
+    if (!document.getElementById('skills-dropdown-wrapper').contains(e.target)) {
+        skillsDropdownMenu.classList.add('hidden');
+    }
+});
+
+function renderSelectedSkills() {
+    selectedSkillsDisplay.innerHTML = '';
+    selectedSkills.forEach(skill => {
+        const tag = document.createElement('span');
+        tag.className = 'flex items-center gap-1 border border-indigo-500 bg-indigo-950/40 text-indigo-300 px-3 py-1 rounded-full text-xs font-medium';
+        tag.innerHTML = `${skill} <button type="button" data-skill="${skill}" class="remove-skill-btn hover:text-pink-400">&times;</button>`;
+        selectedSkillsDisplay.appendChild(tag);
+    });
+
+    document.querySelectorAll('.remove-skill-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            selectedSkills = selectedSkills.filter(s => s !== btn.dataset.skill);
+            const cb = document.querySelector(`.skill-checkbox[value="${btn.dataset.skill}"]`);
+            if (cb) cb.checked = false;
+            syncSkills();
         });
+    });
+}
+
+function syncSkills() {
+    selectedSkillsInput.value = selectedSkills.join(',');
+    skillsDropdownLabel.textContent = selectedSkills.length
+        ? selectedSkills.length + ' skill(s) selected'
+        : 'Select skills...';
+    skillsHint.textContent = selectedSkills.length
+        ? selectedSkills.length + ' skill(s) selected'
+        : 'Select at least one skill';
+    renderSelectedSkills();
+}
+
+skillCheckboxes.forEach(cb => {
+    cb.addEventListener('change', () => {
+        if (cb.checked) {
+            if (!selectedSkills.includes(cb.value)) selectedSkills.push(cb.value);
+        } else {
+            selectedSkills = selectedSkills.filter(s => s !== cb.value);
+        }
+        syncSkills();
+    });
+});
+
+addCustomSkillBtn.addEventListener('click', () => {
+    const val = customSkillInput.value.trim();
+    if (val && !selectedSkills.includes(val)) {
+        selectedSkills.push(val);
+        customSkillInput.value = '';
+        syncSkills();
+    }
+});
+
+customSkillInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        e.preventDefault();
+        addCustomSkillBtn.click();
+    }
+});
+
+function syncSkills() {
+    selectedSkillsInput.value = selectedSkills.join(',');
+    skillsHint.textContent = selectedSkills.length
+        ? selectedSkills.length + ' skill(s) selected'
+        : 'Select at least one skill';
+    renderSelectedSkills();
+}
+
+skillsSelect.addEventListener('change', () => {
+    Array.from(skillsSelect.selectedOptions).forEach(opt => {
+        if (!selectedSkills.includes(opt.value)) selectedSkills.push(opt.value);
+    });
+    syncSkills();
+});
+
+addCustomSkillBtn.addEventListener('click', () => {
+    const val = customSkillInput.value.trim();
+    if (val && !selectedSkills.includes(val)) {
+        selectedSkills.push(val);
+        customSkillInput.value = '';
+        syncSkills();
+    }
+});
+
+customSkillInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        e.preventDefault();
+        addCustomSkillBtn.click();
+    }
+});
 
         const formEl = document.getElementById('recommendation-form');
         const formContainer = document.getElementById('form-container');
