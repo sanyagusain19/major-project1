@@ -4,6 +4,7 @@ from flask import Flask, render_template, request, session
 
 from similarity import recommend_by_skills, get_featured_developers
 from youtube import search_youtube
+from rec_career import recommend as rec_c
 
 
 load_dotenv()
@@ -88,12 +89,24 @@ def youtube():
         "youtube.html",
         videos=videos
     )
+@app.route("/career-recommend")
+def career_recommendation():
 
+    skills_list = session.get("skills", [])
 
+    career_list = rec_c(
+        ",".join(skills_list)
+    )
 
+    return render_template(
+        "career_results.html",
+        careers=career_list
+    )
+
+    
 if __name__ == "__main__":
     app.run(
         host="0.0.0.0",
         port=5000,
-        debug=True
+       debug=True
     )

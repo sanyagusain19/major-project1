@@ -4,7 +4,7 @@ import requests
 from dotenv import load_dotenv
 load_dotenv()
 YOUTUBE = os.getenv("YOUTUBE_TOKEN")
-print("YOUTUBE KEY:", YOUTUBE)
+
 def search_youtube(query, max_results=5):
     url = "https://www.googleapis.com/youtube/v3/search"
     params = {
