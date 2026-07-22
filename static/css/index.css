@@ -113,3 +113,265 @@ body {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+/* ===================================
+   CAREER RESULTS PAGE
+=================================== */
+
+.text-gradient{
+    background:linear-gradient(90deg,#818cf8,#a855f7,#ec4899);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+/* Career Card */
+
+.glow-card{
+    position:relative;
+    overflow:hidden;
+    background:rgba(17,24,39,.65);
+    backdrop-filter:blur(18px);
+    border:1px solid rgba(255,255,255,.08);
+    transition:.35s ease;
+}
+
+.glow-card:hover{
+    transform:translateY(-8px);
+    border-color:#6366f1;
+    box-shadow:
+    0 0 25px rgba(99,102,241,.25),
+    0 0 60px rgba(168,85,247,.15);
+}
+
+/* top glowing line */
+
+.glow-card::before{
+
+    content:"";
+    position:absolute;
+    top:0;
+    left:-100%;
+    width:100%;
+    height:3px;
+
+    background:linear-gradient(
+        90deg,
+        transparent,
+        #818cf8,
+        #a855f7,
+        #ec4899,
+        transparent
+    );
+
+    transition:.7s;
+}
+
+.glow-card:hover::before{
+
+    left:100%;
+
+}
+
+/* Progress Bar */
+
+.progress-bar{
+
+    height:12px;
+    border-radius:999px;
+    overflow:hidden;
+    background:#1f2937;
+
+}
+
+.progress-fill{
+
+    height:100%;
+    border-radius:999px;
+
+    background:linear-gradient(
+        90deg,
+        #ec4899,
+        #8b5cf6,
+        #6366f1
+    );
+
+    animation:growBar 1.4s ease;
+
+}
+
+@keyframes growBar{
+
+    from{
+
+        width:0;
+
+    }
+
+}
+
+/* Skill Chips */
+
+.skill-chip{
+
+    border-radius:999px;
+    padding:.45rem .95rem;
+    font-size:.82rem;
+    font-weight:600;
+
+    transition:.25s;
+
+}
+
+.skill-chip:hover{
+
+    transform:scale(1.08);
+
+}
+
+/* Green */
+
+.skill-green{
+
+    background:rgba(34,197,94,.12);
+    border:1px solid rgba(34,197,94,.35);
+    color:#86efac;
+
+}
+
+/* Orange */
+
+.skill-orange{
+
+    background:rgba(249,115,22,.12);
+    border:1px solid rgba(249,115,22,.35);
+    color:#fdba74;
+
+}
+
+/* Badge */
+
+.rank-badge{
+
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+
+    padding:6px 14px;
+
+    border-radius:999px;
+
+    font-size:.78rem;
+    font-weight:700;
+
+    animation:floatBadge 3s ease-in-out infinite;
+
+}
+
+.gold{
+
+    background:rgba(250,204,21,.12);
+    color:#fde047;
+    border:1px solid rgba(250,204,21,.35);
+
+}
+
+.silver{
+
+    background:rgba(229,231,235,.12);
+    color:#e5e7eb;
+    border:1px solid rgba(229,231,235,.35);
+
+}
+
+.bronze{
+
+    background:rgba(251,146,60,.12);
+    color:#fb923c;
+    border:1px solid rgba(251,146,60,.35);
+
+}
+
+@keyframes floatBadge{
+
+    0%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-4px);
+
+    }
+
+    100%{
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* AI Message Box */
+
+.ai-box{
+
+    background:rgba(99,102,241,.08);
+    border:1px solid rgba(99,102,241,.2);
+    border-radius:16px;
+
+    padding:20px;
+
+}
+
+/* Count Boxes */
+
+.stat-box{
+
+    background:#111827;
+
+    border:1px solid rgba(255,255,255,.05);
+
+    border-radius:18px;
+
+    transition:.3s;
+
+}
+
+.stat-box:hover{
+
+    border-color:#6366f1;
+
+    transform:translateY(-4px);
+
+}
+
+/* Button */
+
+.ai-btn{
+
+    transition:.3s;
+
+}
+
+.ai-btn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 0 25px rgba(99,102,241,.45);
+
+}
+
+/* Empty State */
+
+.empty-box{
+
+    background:rgba(17,24,39,.65);
+
+    backdrop-filter:blur(15px);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:22px;
+
+}
